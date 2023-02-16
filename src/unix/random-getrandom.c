@@ -22,7 +22,7 @@
 #include "uv.h"
 #include "internal.h"
 
-#ifdef __linux__
+#if defined(__linux__) || defined(__midipix__)
 
 #define uv__random_getrandom_init() 0
 

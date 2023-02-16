@@ -201,7 +201,7 @@ static ssize_t uv__fs_fsync(uv_fs_t* req) {
 
 
 static ssize_t uv__fs_fdatasync(uv_fs_t* req) {
-#if defined(__linux__) || defined(__sun) || defined(__NetBSD__)
+#if defined(__linux__) || defined(__sun) || defined(__NetBSD__) || defined(__midipix__)
   return fdatasync(req->file);
 #elif defined(__APPLE__)
   /* See the comment in uv__fs_fsync. */
@@ -246,7 +246,8 @@ static ssize_t uv__fs_futime(uv_fs_t* req) {
 #if defined(__linux__)                                                        \
     || defined(_AIX71)                                                        \
     || defined(__HAIKU__)                                                     \
-    || defined(__GNU__)
+    || defined(__GNU__)                                                       \
+    || defined(__midipix__)
   struct timespec ts[2];
   ts[0] = uv__fs_to_timespec(req->atime);
   ts[1] = uv__fs_to_timespec(req->mtime);
@@ -1118,7 +1119,8 @@ static ssize_t uv__fs_utime(uv_fs_t* req) {
 #if defined(__linux__)                                                         \
     || defined(_AIX71)                                                         \
     || defined(__sun)                                                          \
-    || defined(__HAIKU__)
+    || defined(__HAIKU__)                                                      \
+    || defined(__midipix__)
   struct timespec ts[2];
   ts[0] = uv__fs_to_timespec(req->atime);
   ts[1] = uv__fs_to_timespec(req->mtime);
@@ -1159,7 +1161,8 @@ static ssize_t uv__fs_lutime(uv_fs_t* req) {
     defined(__sun)                ||                                           \
     defined(__HAIKU__)            ||                                           \
     defined(__GNU__)              ||                                           \
-    defined(__OpenBSD__)
+    defined(__OpenBSD__)          ||                                           \
+    defined(__midipix__)
   struct timespec ts[2];
   ts[0] = uv__fs_to_timespec(req->atime);
   ts[1] = uv__fs_to_timespec(req->mtime);

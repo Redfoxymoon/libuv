@@ -215,7 +215,8 @@ struct uv__statx {
     defined(__FreeBSD__) || \
     defined(__linux__) || \
     defined(__OpenBSD__) || \
-    defined(__NetBSD__)
+    defined(__NetBSD__) || \
+    defined(__midipix__)
 #define uv__nonblock uv__nonblock_ioctl
 #define UV__NONBLOCK_IS_IOCTL 1
 #else
@@ -406,6 +407,10 @@ int uv__statx(int dirfd,
               int flags,
               unsigned int mask,
               struct uv__statx* statxbuf);
+ssize_t uv__getrandom(void* buf, size_t buflen, unsigned flags);
+#endif
+
+#if defined(__midipix__)
 ssize_t uv__getrandom(void* buf, size_t buflen, unsigned flags);
 #endif
 

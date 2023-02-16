@@ -546,5 +546,18 @@ libuv_la_SOURCES += src/unix/os390.c \
                     src/unix/proctitle.c
 endif
 
+if MIDIPIX
+include_HEADERS += include/uv-posix.h
+libuv_la_CFLAGS += -D_GNU_SOURCE
+libuv_la_SOURCES += src/unix/midipix.c \
+                    src/unix/no-fsevents.c \
+                    src/unix/no-proctitle.c \
+                    src/unix/posix-hrtime.c \
+                    src/unix/posix-poll.c \
+                    src/unix/procfs-exepath.c \
+                    src/unix/sysinfo-loadavg.c \
+                    src/unix/sysinfo-memory.c
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = @PACKAGE_NAME@.pc

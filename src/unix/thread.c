@@ -214,7 +214,7 @@ static size_t uv__default_stack_size(void) {
  * stack size by default.  Adjust to RLIMIT_STACK aligned to the page size.
  */
 size_t uv__thread_stack_size(void) {
-#if defined(__APPLE__) || defined(__linux__)
+#if defined(__APPLE__) || defined(__linux__) || defined(__midipix__)
   struct rlimit lim;
 
   /* getrlimit() can fail on some aarch64 systems due to a glibc bug where
